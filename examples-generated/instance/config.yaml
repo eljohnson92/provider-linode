@@ -47,7 +47,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     label: boot
-    linodeId: ${linode_instance.my-instance.id}
+    linodeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my-instance
     rootPassSecretRef:
       key: example-key
       name: example-secret

@@ -37,6 +37,22 @@ func (mg *Disk) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.Image = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ImageRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinodeID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LinodeIDRef,
+		Selector:     mg.Spec.ForProvider.LinodeIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LinodeID")
+	}
+	mg.Spec.ForProvider.LinodeID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LinodeIDRef = rsp.ResolvedReference
+
 	return nil
 }
 

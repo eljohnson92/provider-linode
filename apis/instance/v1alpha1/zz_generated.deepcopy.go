@@ -1229,6 +1229,16 @@ func (in *DiskParameters_2) DeepCopyInto(out *DiskParameters_2) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.LinodeIDRef != nil {
+		in, out := &in.LinodeIDRef, &out.LinodeIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinodeIDSelector != nil {
+		in, out := &in.LinodeIDSelector, &out.LinodeIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RootPassSecretRef != nil {
 		in, out := &in.RootPassSecretRef, &out.RootPassSecretRef
 		*out = new(v1.SecretKeySelector)

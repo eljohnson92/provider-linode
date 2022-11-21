@@ -10,5 +10,9 @@ func Configure(p *config.Provider) {
 			Type: "github.com/linode/provider-linode/apis/image/v1alpha1.Image",
 		}
 
+		r.References["linode_id"] = config.Reference{
+			Type: "github.com/linode/provider-linode/apis/instance/v1alpha1.Instance",
+		}
+
 	})
 }
